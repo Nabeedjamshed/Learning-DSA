@@ -3,6 +3,15 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "stack": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "xlocale": "cpp",
+        "string": "cpp",
+        "format": "cpp",
+        "initializer_list": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "list": "cpp",
+        "map": "cpp"
     }
 }

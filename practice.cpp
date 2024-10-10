@@ -510,15 +510,15 @@
 // }
 
 
-#include<iostream>
-using namespace std;
+// #include<iostream>
+// using namespace std;
 
-struct Node{
-    int value;
-    Node* next;
-};
+// struct Node{
+//     int value;
+//     Node* next;
+// };
 
-Node* head = nullptr;
+// Node* head = nullptr;
 // Node* insertatbegin(Node* head, int x){
 //     Node* temp = new Node();
 //     temp->value = x;
@@ -526,33 +526,99 @@ Node* head = nullptr;
 //     head = temp;
 //     return head;
 // }
-Node* insertatbegin(Node* head, int x){
-    Node* temp = new Node();
-    temp->value = x;
-    temp->next = nullptr;
-    if (temp == nullptr)
-    {
-        head = temp;
-    } else {
-        temp->next = head;
-        head = temp;
-    }
-    return head;
+// Node* insertatbegin(Node* head, int x){
+//     Node* temp = new Node();
+//     temp->value = x;
+//     temp->next = nullptr;
+//     if (temp == nullptr)
+//     {
+//         head = temp;
+//     } else {
+//         temp->next = head;
+//         head = temp;
+//     }
+//     return head;
+// }
+// void display(Node* head){
+//     Node* temp = head;
+//     while (temp != nullptr)
+//     {
+//         cout<<temp->value<<" ";
+//         temp = temp->next;
+//     }
+// }
+// int main() {
+//     Node* head = nullptr;
+//     head = insertatbegin(head, 4);
+//     head = insertatbegin(head, 3);
+//     head = insertatbegin(head, 2);
+//     head = insertatbegin(head, 1);
+//     display(head);
+//     return 0;
+// }
+
+
+
+#include <iostream>
+#include <algorithm> 
+using namespace std;
+
+void flip(int array[], int k) {
+    reverse(array, array + k);
 }
-void display(Node* head){
-    Node* temp = head;
-    while (temp != nullptr)
-    {
-        cout<<temp->value<<" ";
-        temp = temp->next;
+
+int max_ind(int array[], int n) {
+    int max_index = 0;
+    for (int i = 1; i < n; ++i) {
+        if (array[i] > array[max_index]) {
+            max_index = i;
+        }
     }
+    return max_index;
 }
+
+void sort(int array[], int n) {
+    int flips[2 * n];
+    int flip_count = 0;
+
+    for (int size = n; size > 1; --size) {
+        int max_index = max_ind(array, size);
+        
+        if (max_index != size - 1) {
+            if (max_index != 0) {
+                flip(array, max_index+1);
+                flips[flip_count++] = max_index + 1;
+            }
+            flip(array, size);
+            flips[flip_count++] = size;
+        }
+    }
+    if (n > 1) {
+        flips[flip_count++] = 1; // Flip the last single element (1-based)
+        flips[flip_count++] = 2; // Flip the second last element (1-based)
+    }
+    cout << "Flips: ";
+    for (int i = 0; i < flip_count; ++i) {
+        cout << flips[i] << " ";
+    }
+    cout << endl;
+}
+
+void print_array(int array[], int n) {
+    for (int i = 0; i < n; ++i) {
+        cout << array[i] << " ";
+    }
+    cout << endl;
+}
+
 int main() {
-    Node* head = nullptr;
-    head = insertatbegin(head, 4);
-    head = insertatbegin(head, 3);
-    head = insertatbegin(head, 2);
-    head = insertatbegin(head, 1);
-    display(head);
+    int array[] = {3, 2, 4, 1};
+    int n = sizeof(array) / sizeof(array[0]);
+
+    cout << "Original array: ";
+    print_array(array, n);
+    sort(array, n);
+    cout << "Sorted array: ";
+    print_array(array, n);
     return 0;
 }

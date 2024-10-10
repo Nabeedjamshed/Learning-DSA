@@ -32,55 +32,56 @@ void print(Node* head){
     cout<<endl;
 }
 // With Node Number
-// void deleted(int n){
-//     Node* temp1 = head;
-//     if (n==1)
-//     {
-//         head = temp1->next;
-//         delete temp1;
-//     } else {
-    
-//     for (int i = 1; i < n-1; i++)
-//     {
-//         temp1 = temp1->next;
-//     }
-//     Node* temp2 = temp1->next;  
-//     temp1->next = temp2->next;
-//     delete temp2; 
-//     }
-// }
-
-// With Value
-void deleted(int n){
-    Node* temp = head;
-    int lenght = 0;
-    while (temp->next != nullptr)
-    {
-        if (temp->data != n)
-        {
-            lenght++;
-            temp = temp->next;
-        } else{
-            break;
-        }
-    }
-    cout<<lenght<<endl;
+Node* deleted(int n){
     Node* temp1 = head;
-    if (lenght==0)
+    if (n==1)
     {
         head = temp1->next;
         delete temp1;
     } else {
     
-    for (int i = 1; i < lenght; i++)
+    for (int i = 1; i < n-1; i++)
     {
-        temp1=temp1->next;
+        temp1 = temp1->next;
     }
-    Node* temp2 = temp1->next;
+    Node* temp2 = temp1->next;  
     temp1->next = temp2->next;
-    delete temp2;
+    delete temp2; 
     }
+    return temp1;
 }
+
+// With Value
+// void deleted(int n){
+//     Node* temp = head;
+//     int lenght = 0;
+//     while (temp->next != nullptr)
+//     {
+//         if (temp->data != n)
+//         {
+//             lenght++;
+//             temp = temp->next;
+//         } else{
+//             break;
+//         }
+//     }
+//     cout<<lenght<<endl;
+//     Node* temp1 = head;
+//     if (lenght==0)
+//     {
+//         head = temp1->next;
+//         delete temp1;
+//     } else {
+    
+//     for (int i = 1; i < lenght; i++)
+//     {
+//         temp1=temp1->next;
+//     }
+//     Node* temp2 = temp1->next;
+//     temp1->next = temp2->next;
+//     delete temp2;
+//     }
+// }
 
 
 // Node* deleteatend(){
@@ -93,14 +94,35 @@ void deleted(int n){
 //     return head;
 // }
 
-void deleteatbegin(){
-    if (head==nullptr)
-    {
-        return;
-    } 
+// void deleteatbegin(){
+//     if (head==nullptr)
+//     {
+//         return;
+//     } 
+//     Node* temp = head;
+//     head = temp->next;
+//     delete temp;
+// }
+
+Node* deleteMiddle(Node* head) {
     Node* temp = head;
-    head = temp->next;
-    delete temp;
+    int count = 0;
+    while(temp!= nullptr){
+        count++;
+        temp = temp->next;
+    }
+    // cout<<count<<endl;
+    int newcount = count/2;
+    return deleted(newcount);
+//     cout<<newcount<<endl;
+//     Node* temp1 = head;
+//     for(int i=0; i < newcount;i++){
+//         temp1 = temp1->next;
+//     }
+//     Node* temp2 = temp1->next;
+//     temp1->next = temp2->next;
+//     // delete temp2;
+//     return temp2;
 }
 int main() {
     head = nullptr;
@@ -111,7 +133,9 @@ int main() {
     print(head);
     // cout<<"After delete: "<<endl;
     // deleted(4);
-    deleteatbegin();
+    // deleteatbegin();
+    // print(head);
+    head = deleteMiddle(head);
     print(head);
     return 0;
 }
