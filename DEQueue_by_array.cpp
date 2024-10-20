@@ -7,12 +7,12 @@ private:
     static const int max_size = 10;
     int DEqueue[max_size];
     int Front = -1;
-    int tail = -1;
-
+    int rear = -1;
+    int count = 0;
 public:
     bool isEmpty()
     {
-        if (Front == -1 && tail == -1)
+        if (Front == -1 && rear == -1)
         {
             return true;
         }
@@ -23,9 +23,9 @@ public:
     }
     bool isFull()
     {
-        return Front == (tail + 1) % max_size;
+        return count == max_size;
     }
-    void enqueueLast(int x)
+    void insertRear(int x)
     {
         if (isFull())
         {
@@ -34,20 +34,22 @@ public:
         else if (isEmpty())
         {
             Front = 0;
-            tail = 0;
+            rear = 0;
         }
         else
         {
-            tail = (tail + 1) % max_size;
+            rear = (rear + 1) % max_size;
         }
-        DEqueue[tail] = x;
+        DEqueue[rear] = x;
+        count++;
     }
-    void enqueuefront(int x)
+    void insertFront(int x)
     {
         if (isEmpty())
         {
-            Front = tail = 0;
+            Front = rear = 0;
             DEqueue[Front] = x;
+            count++;
         }
         else
         {
@@ -57,13 +59,13 @@ public:
             }
             else
             {
-                // Front--;
                 Front = (Front - 1 + max_size) % max_size; // for circular nature
                 DEqueue[Front] = x;
+                count++;
             }
         }
     }
-    int dequeuefront()
+    int deleteFront()
     {
         if (isEmpty())
         {
@@ -72,19 +74,20 @@ public:
         else
         {
             int deq = DEqueue[Front];
-            if (Front == tail)
+            if (Front == rear)
             {
                 Front = -1;
-                tail = -1;
+                rear = -1;
             }
             else
             {
                 Front = (Front + 1) % max_size;
             }
+            count--;
             return deq;
         }
     }
-    int dequeuelast()
+    int deleteRear()
     {
         if (isEmpty())
         {
@@ -92,17 +95,17 @@ public:
         }
         else
         {
-            int deq = DEqueue[tail];
-            if (Front == tail)
+            int deq = DEqueue[rear];
+            if (Front == rear)
             {
                 Front = -1;
-                tail = -1;
+                rear = -1;
             }
             else
             {
-                tail--;
-                tail = (tail - 1 + max_size) % max_size; // for circular nature
+                rear = (rear - 1 + max_size) % max_size; // for circular nature
             }
+            count--;
             return deq;
         }
     }
@@ -117,30 +120,42 @@ public:
             return DEqueue[Front];
         }
     }
-    void print()
+    int size(){
+        return count;
+    }
+    void display()
     {
-        for (int i = Front; i <= tail; i++)
-        {
-            cout << DEqueue[i] << " ";
+        if (isEmpty()) {
+            cout << "Queue is empty." << endl;
+            return;
         }
-        cout << endl;
+        int i = Front;
+        while(i != rear){
+            cout<<DEqueue[i]<<" ";
+            i = (i+1)%max_size;
+        }
+        cout<<DEqueue[rear]<<" ";
+        cout<<endl;
     }
 };
 
 int main()
 {
     DEQueue q;
-    q.enqueueLast(2);
-    q.enqueueLast(4);
-    q.enqueueLast(5);
-    q.enqueueLast(7);
-    q.print();
-    cout << "The deleted element which is delete is: " << q.dequeuefront() << endl;
+    q.insertRear(2);
+    q.insertRear(4);
+    q.insertRear(5);
+    q.insertRear(7);
+    q.display();
+    cout << "Current number of elements in the DEQueue is: " << q.size() << endl;
+    cout << "The deleted element is: " << q.deleteFront() << endl;
+    q.display();
+    cout << "Current number of elements in the DEQueue is: " << q.size() << endl;
     cout << "The top element in DEqueue is: " << q.front() << endl;
-    q.print();
-    q.enqueuefront(1);
-    q.print();
-    cout << "The deleted element which is delete is: " << q.dequeuelast() << endl;
-    q.print();
+    cout<<"Insert from front"<<endl;
+    q.insertFront(1);
+    q.display();
+    cout << "The deleted element from rear is: " << q.deleteRear() << endl;
+    q.display();
     return 0;
 }

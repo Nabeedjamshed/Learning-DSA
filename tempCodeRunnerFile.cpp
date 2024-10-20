@@ -1,37 +1,54 @@
-#include <iostream>
-#include <vector>
+#include<iostream>
+#include<queue>
 using namespace std;
 
-int fabonacci(int n, vector<int> &dp)
-{
-    if (n <= 1)
-    {
-        return n;
-    }
-    if (dp[n] != -1)
-    {
-        return dp[n];
-    }
-    else
-    {
-        return dp[n] = fabonacci(n - 2, dp) + fabonacci(n - 1, dp);
-    }
-}
-int main()
-{
-    int n;
-    cout << "Enter num: ";
-    cin >> n;
-    vector<int> dp(n + 1, -1);
-    vector<int> l;
-    for (int i = 0; i <= n; i++)
-    {
-        l.push_back(fabonacci(i, dp));
-    }
+class PriorityQueue {
+    public:
+        priority_queue<int> maxHeap;
+        void insertMax(int n) {
+            maxHeap.push(n);
+        }
 
-    for (auto a : l)
-    {
-        cout << a << " ";
-    }
+        priority_queue<int, vector<int>, greater<int>> minHeap;
+        void insertMin(int n) {
+            minHeap.push(n);
+        }
+
+        void displayMax() {
+            priority_queue<int> temp = maxHeap;
+            cout << "Max Heap: ";
+            while (!temp.empty()) {
+                cout << temp.top() << " ";
+                temp.pop();
+            }
+            cout << endl;
+        }
+
+        void displayMin() {
+            priority_queue<int, vector<int>, greater<int>> temp = minHeap;
+            cout << "Min Heap: ";
+            while (!temp.empty()) {
+                cout << temp.top() << " ";
+                temp.pop();
+            }
+            cout << endl;
+        }
+};
+
+int main() {
+    PriorityQueue pq;
+
+    pq.insertMax(1);
+    pq.insertMax(2);
+    pq.insertMax(3);
+    pq.insertMax(4);
+    pq.displayMax(); 
+
+    pq.insertMin(1);
+    pq.insertMin(2);
+    pq.insertMin(3);
+    pq.insertMin(4);
+    pq.displayMin(); 
+
     return 0;
 }
