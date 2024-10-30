@@ -25,10 +25,12 @@ void enqueue(int n){
     {
         head = temp;
         tail = temp;
-    } else {
+    } 
+    else {
         tail->next = temp;
         tail = temp;
-    }
+        tail->next = head;    
+        }
 }
 void dequeue(){
     Node* temp = head;
@@ -42,6 +44,7 @@ void dequeue(){
         delete temp;
     } else {
     head = temp->next;
+    tail->next = head;
     delete temp;
     }
 }
@@ -56,11 +59,12 @@ int front(){
 
 void print(){
     Node* temp=head;
-    while (temp!=nullptr)
+    do
     {
         cout<<temp->data<<" ";
         temp = temp->next;
-    }
+    } while (temp != head);
+
     cout<<endl;
 }
 int main() {

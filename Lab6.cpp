@@ -138,19 +138,19 @@
 //         return count;
 //     }
 
-//     void display() {
-//         if (isEmpty()) {
-//             cout << "Queue is empty." << endl;
-//             return;
-//         }
+    // void display() {
+    //     if (isEmpty()) {
+    //         cout << "Queue is empty." << endl;
+    //         return;
+    //     }
 
-//         int i = front;
-//         while (i != rear) {
-//             cout << queue[i] << " ";
-//             i = (i + 1) % max_size;
-//         }
-//         cout << queue[rear] << endl;  
-//     }
+    //     int i = front;
+    //     while (i != rear) {
+    //         cout << queue[i] << " ";
+    //         i = (i + 1) % max_size;
+    //     }
+    //     cout << queue[rear] << endl;  
+    // }
 // };
 
 // int main() {

@@ -40,28 +40,28 @@ void print(Node* root){
     print(root->right); 
 }
 
-void levelorder(Node* root){
-    if (root == nullptr)
-    {
-        return;
-    }
-    queue <Node*> q;
-    q.push(root);
-    while (!q.empty())
-    {
-        Node* temp = q.front();
-        cout<<temp->data<<" ";
-        if (temp->left != nullptr)
-        {
-            q.push(temp->left);
-        } if (temp->right != nullptr)
-        {
-            q.push(temp->right);
-        }
-        q.pop();
-    }
+// void levelorder(Node* root){
+//     if (root == nullptr)
+//     {
+//         return;
+//     }
+//     queue <Node*> q;
+//     q.push(root);
+//     while (!q.empty())
+//     {
+//         Node* temp = q.front();
+//         cout<<temp->data<<" ";
+//         if (temp->left != nullptr)
+//         {
+//             q.push(temp->left);
+//         } if (temp->right != nullptr)
+//         {
+//             q.push(temp->right);
+//         }
+//         q.pop();
+//     }
     
-}
+// }
 
 void preorderbystack(Node* root){
     if (root == nullptr)
@@ -176,14 +176,67 @@ int maxdepth(Node* root){
     int r = maxdepth(root->right);
     return max(l, r)+1;
 }
+
+int levelorderdepth(Node* root){
+    if (root == nullptr)
+    {
+        return 0;
+    }
+    int depth = 0;
+    queue <Node*> q;
+    q.push(root);
+    while(!q.empty()){
+        int currsize = q.size();
+        for (int i = 0; i < currsize; i++)
+        {
+            Node* temp = q.front();
+            q.pop();
+            cout<<temp->data<<" ";
+            if (temp->left != nullptr)
+            {
+                q.push(temp->left);
+            } 
+            if (temp->right != nullptr)
+            {
+                q.push(temp->right);
+            } 
+        }
+        depth++;
+        }
+        
+
+    return depth;
+}
+
+
+bool isbalancetree(Node* root){
+    if (root == nullptr)
+    {
+        return true;
+    }
+    int l = isbalancetree(root->left);
+    int r = isbalancetree(root->right);
+    if (abs(l-r) > 1)
+    {
+        return false;
+    }
+    
+    return max(l,r)+1;
+}
 int main() {
     Node* root = nullptr;
+    // root = insert(root, 12);
+    // root = insert(root, 10);
+    // root = insert(root, 14);
+    // root = insert(root, 9);
+    // root = insert(root, 11);
+    // root = insert(root, 13);
+    // root = insert(root, 15);
     root = insert(root, 1);
     root = insert(root, 2);
     root = insert(root, 3);
     root = insert(root, 4);
-    root = insert(root, 5);
-    root = insert(root, 6);
+
     // print(root);
     // cout<<endl;
     // levelorder(root);
@@ -194,7 +247,17 @@ int main() {
     // inorderByStack(root);
     // cout<<endl;
     // inorder(root);
-    int res = maxdepth(root);
+    int res1 = maxdepth(root);
+    cout<<"Max depth is: "<<res1<<endl;
+    int res = levelorderdepth(root);
     cout<<"Max depth is: "<<res<<endl;
+    bool balance = isbalancetree(root);
+    if (balance)
+    {
+        cout<<"balance"<<endl;
+    } else {
+        cout<<"unbalaced"<<endl;
+    }
+    
     return 0;
 }
