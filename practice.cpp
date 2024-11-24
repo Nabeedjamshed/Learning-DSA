@@ -559,66 +559,415 @@
 
 
 
+// #include <iostream>
+// #include <algorithm> 
+// using namespace std;
+
+// void flip(int array[], int k) {
+//     reverse(array, array + k);
+// }
+
+// int max_ind(int array[], int n) {
+//     int max_index = 0;
+//     for (int i = 1; i < n; ++i) {
+//         if (array[i] > array[max_index]) {
+//             max_index = i;
+//         }
+//     }
+//     return max_index;
+// }
+
+// void sort(int array[], int n) {
+//     int flips[2 * n];
+//     int flip_count = 0;
+
+//     for (int size = n; size > 1; --size) {
+//         int max_index = max_ind(array, size);
+        
+//         if (max_index != size - 1) {
+//             if (max_index != 0) {
+//                 flip(array, max_index+1);
+//                 flips[flip_count++] = max_index + 1;
+//             }
+//             flip(array, size);
+//             flips[flip_count++] = size;
+//         }
+//     }
+//     if (n > 1) {
+//         flips[flip_count++] = 1; // Flip the last single element (1-based)
+//         flips[flip_count++] = 2; // Flip the second last element (1-based)
+//     }
+//     cout << "Flips: ";
+//     for (int i = 0; i < flip_count; ++i) {
+//         cout << flips[i] << " ";
+//     }
+//     cout << endl;
+// }
+
+// void print_array(int array[], int n) {
+//     for (int i = 0; i < n; ++i) {
+//         cout << array[i] << " ";
+//     }
+//     cout << endl;
+// }
+
+// int main() {
+//     int array[] = {3, 2, 4, 1};
+//     int n = sizeof(array) / sizeof(array[0]);
+
+//     cout << "Original array: ";
+//     print_array(array, n);
+//     sort(array, n);
+//     cout << "Sorted array: ";
+//     print_array(array, n);
+//     return 0;
+// }
+
+
+// #include<iostream>
+// using namespace std;
+
+// struct Node{
+//     int data;
+//     Node* left;
+//     Node* right;
+// };
+
+// Node* insertion_of_tree(Node* root, int val){
+//     Node* newnode = new Node();
+//     newnode->data = val;
+//     newnode->left = nullptr;
+//     newnode->right = nullptr;
+//     if(root == nullptr){
+//         root = newnode;
+//     } else if(root->data < val){
+//         root->right = insertion_of_tree(root->right, val);
+//     } else {
+//         root->left = insertion_of_tree(root->left, val);
+//     }
+//     return root;
+// }
+
+// void print(Node* root){
+//     if(root == nullptr){
+//         return;
+//     }
+//     print(root->left);
+//     cout<<root->data<<" ";
+//     print(root->right);
+// }
+
+// Node* findmin(Node* root){
+//     if(root->left == nullptr){
+//         return root;
+//     }
+//     return findmin(root->left);
+// }
+// Node* deletion_of_tree(Node* root, int val){
+//     if(root == nullptr){
+//         return root;
+//     } else if(root->data < val){
+//         root->right = deletion_of_tree(root->right, val);
+//     } else if(root->data > val){
+//         root->left = deletion_of_tree(root->left, val);
+//     } else {
+//         if(root->left == nullptr && root->right == nullptr){
+//             delete root;
+//             return nullptr;
+//         } else if(root->left == nullptr){
+//             Node* temp = root;
+//             root = root->right;
+//             delete temp;
+//         }
+//          else if(root->right == nullptr){
+//             Node* temp = root;
+//             root = root->left;
+//             delete temp;
+//         } else {
+//             Node* temp = findmin(root->right);
+//             int temporary = root->data;
+//             root->data = temp->data;
+//             temp->data = temporary;
+//             root->right = deletion_of_tree(root->right, temp->data);
+//         }
+//     }
+//     return root;
+// }
+// int main() {
+//     Node* root = nullptr;
+//     root = insertion_of_tree(root, 13);
+//     root = insertion_of_tree(root, 10);
+//     root = insertion_of_tree(root, 20);
+//     root = insertion_of_tree(root, 18);
+//     root = insertion_of_tree(root, 16);
+//     root = insertion_of_tree(root, 19);
+//     root = insertion_of_tree(root, 23);
+//     root = insertion_of_tree(root, 21);
+//     root = insertion_of_tree(root, 25);
+//     root = insertion_of_tree(root, 24);
+//     root = insertion_of_tree(root, 23);
+//     root = insertion_of_tree(root, 27);
+//     print(root);
+//     root = deletion_of_tree(root, 21);
+//     cout<<endl;
+//     print(root);
+//     root = deletion_of_tree(root, 13);
+//     cout<<endl;
+//     print(root);
+//     return 0;
+// }
+
+
+// #include <iostream>
+// #include <vector>
+// #include <queue>
+// using namespace std;
+
+// struct Node {
+//     int data;
+//     Node* left;
+//     Node* right;
+
+//     Node(int val) : data(val), left(nullptr), right(nullptr) {}
+// };
+
+// Node* insert(Node* root, int element) {
+//     if(element == -1){
+//         return root;
+//     }
+//     Node* temp = new Node(element);
+
+//     if (root == nullptr) {
+//         root = temp;
+//         return root;
+//     }
+
+//     queue<Node*> q;
+//     q.push(root);
+
+//     while (!q.empty()) {
+//         Node* current = q.front();
+//         q.pop();
+
+//         if (current->left == nullptr) {
+//             current->left = temp;
+//             return root;
+//         } else {
+//             q.push(current->left);
+//         }
+
+//         if (current->right == nullptr) {
+//             current->right = temp;
+//             return root;
+//         } else {
+//             q.push(current->right);
+//         }
+//     }
+
+//     return root; 
+// }
+
+// void inorder(Node* root){
+// 	if(root == nullptr){
+// 		return;
+// 	}
+// 	inorder(root->left);
+// 	cout<<root->data<<" ";
+// 	inorder(root->right);
+// }
+
+// vector<int> swapNodes(Node* root, int level) {
+//     vector<int> arr;
+//     if (root == nullptr) {
+//         return arr;
+//     }
+
+//     int levelcounter = 0;
+//     levelcounter++;
+//     if (levelcounter == level) {
+//         Node* temp = root->left;
+//         root->left = root->right;
+//         root->right = temp;
+
+//         if (root->left != nullptr && root->left->data != -1) {
+//             arr.push_back(root->left->data);
+//         }
+
+//         if (root->data != -1) {
+//             arr.push_back(root->data);
+//         }
+
+//         if (root->right != nullptr && root->right->data != -1) {
+//             arr.push_back(root->right->data);
+//         }
+
+//     } else {
+//         inorder(root->left);
+//         inorder(root->right);
+//     }
+
+//     return arr;
+// }
+
+// int main(){
+//     Node* root = nullptr;
+//     int nodes;
+//     cout<<"Enter amt nodes: ";
+//     cin>>nodes;
+//     root = insert(root,1);
+//     // cout<<root->data<<" ";
+//     for(int i=0; i<nodes; i++){
+//         int n1,n2;
+//         cout<<"Enter nodes: ";
+//         cin>>n1>>n2;
+//         root = insert(root,n1);
+//         root = insert(root,n2);
+//     }
+//     // inorder(root);
+//     int swp;
+//     cout<<"How many times do you want to swap?: ";
+//     cin>>swp;
+//     vector <int> arr1;
+//     for (int i = 0; i < swp; i++)
+//     {
+//         int level;
+//         cout<<"Enter level do you want to swap: ";
+//         cin>>level;
+//         arr1 = swapNodes(root, level);
+//     }
+ 
+//     for (auto& a : arr1) {
+//         cout << a << " ";
+        
+//     }
+//     cout << endl;
+    
+ 
+// }
+
+
 #include <iostream>
-#include <algorithm> 
+#include <vector>
+#include <queue>
 using namespace std;
 
-void flip(int array[], int k) {
-    reverse(array, array + k);
-}
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
 
-int max_ind(int array[], int n) {
-    int max_index = 0;
-    for (int i = 1; i < n; ++i) {
-        if (array[i] > array[max_index]) {
-            max_index = i;
+    Node(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+Node* insert(Node* root, int element) {
+    if (element == -1) return root; // Skip inserting -1 as a node
+
+    Node* temp = new Node(element);
+
+    if (root == nullptr) {
+        root = temp;
+        return root;
+    }
+
+    queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty()) {
+        Node* current = q.front();
+        q.pop();
+
+        if (current->left == nullptr) {
+            current->left = temp;
+            return root;
+        } else {
+            q.push(current->left);
+        }
+
+        if (current->right == nullptr) {
+            current->right = temp;
+            return root;
+        } else {
+            q.push(current->right);
         }
     }
-    return max_index;
+
+    return root;
 }
 
-void sort(int array[], int n) {
-    int flips[2 * n];
-    int flip_count = 0;
+vector<int> swapNodes(Node* root, int level) {
+    vector<int> arr;
+    if (root == nullptr) {
+        return arr;
+    }
 
-    for (int size = n; size > 1; --size) {
-        int max_index = max_ind(array, size);
-        
-        if (max_index != size - 1) {
-            if (max_index != 0) {
-                flip(array, max_index+1);
-                flips[flip_count++] = max_index + 1;
-            }
-            flip(array, size);
-            flips[flip_count++] = size;
+    queue<pair<Node*, int>> q;
+    q.push({root, 1}); // Start from level 1
+
+    while (!q.empty()) {
+        Node* current = q.front().first;
+        int currLevel = q.front().second;
+        q.pop();
+
+        if (currLevel == level) {
+            // Swap left and right children
+            Node* temp = current->left;
+            current->left = current->right;
+            current->right = temp;
         }
-    }
-    if (n > 1) {
-        flips[flip_count++] = 1; // Flip the last single element (1-based)
-        flips[flip_count++] = 2; // Flip the second last element (1-based)
-    }
-    cout << "Flips: ";
-    for (int i = 0; i < flip_count; ++i) {
-        cout << flips[i] << " ";
-    }
-    cout << endl;
-}
 
-void print_array(int array[], int n) {
-    for (int i = 0; i < n; ++i) {
-        cout << array[i] << " ";
+        // Push left and right children into the queue if they exist
+        if (current->left != nullptr) q.push({current->left, currLevel + 1});
+        if (current->right != nullptr) q.push({current->right, currLevel + 1});
     }
-    cout << endl;
+
+    // Collect all nodes in inorder traversal after swapping
+    queue<Node*> traversalQueue;
+    traversalQueue.push(root);
+
+    while (!traversalQueue.empty()) {
+        Node* current = traversalQueue.front();
+        traversalQueue.pop();
+
+        arr.push_back(current->data);
+
+        if (current->left != nullptr) traversalQueue.push(current->left);
+        if (current->right != nullptr) traversalQueue.push(current->right);
+    }
+
+    return arr;
 }
 
 int main() {
-    int array[] = {3, 2, 4, 1};
-    int n = sizeof(array) / sizeof(array[0]);
+    Node* root = nullptr;
+    int nodes;
+    cout << "Enter amt nodes: ";
+    cin >> nodes;
+    root = insert(root, 1);
 
-    cout << "Original array: ";
-    print_array(array, n);
-    sort(array, n);
-    cout << "Sorted array: ";
-    print_array(array, n);
+    for (int i = 0; i < nodes; i++) {
+        int n1, n2;
+        cout << "Enter nodes: ";
+        cin >> n1 >> n2;
+        if (n1 != -1) root = insert(root, n1);
+        if (n2 != -1) root = insert(root, n2);
+    }
+
+    int swp;
+    cout << "How many times do you want to swap?: ";
+    cin >> swp;
+
+    for (int i = 0; i < swp; i++) {
+        int level;
+        cout << "Enter level do you want to swap: ";
+        cin >> level;
+
+        vector<int> arr = swapNodes(root, level);
+
+        for (auto& a : arr) {
+            cout << a << " ";
+        }
+        cout << endl;
+    }
+
     return 0;
 }

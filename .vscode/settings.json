@@ -12,6 +12,7 @@
         "xstring": "cpp",
         "xutility": "cpp",
         "list": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "functional": "cpp"
     }
 }

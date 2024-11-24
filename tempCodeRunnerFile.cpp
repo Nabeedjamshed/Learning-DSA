@@ -1,54 +1,47 @@
-#include<iostream>
-#include<queue>
+#include <iostream>
+#include<vector>
 using namespace std;
 
-class PriorityQueue {
-    public:
-        priority_queue<int> maxHeap;
-        void insertMax(int n) {
-            maxHeap.push(n);
-        }
-
-        priority_queue<int, vector<int>, greater<int>> minHeap;
-        void insertMin(int n) {
-            minHeap.push(n);
-        }
-
-        void displayMax() {
-            priority_queue<int> temp = maxHeap;
-            cout << "Max Heap: ";
-            while (!temp.empty()) {
-                cout << temp.top() << " ";
-                temp.pop();
-            }
-            cout << endl;
-        }
-
-        void displayMin() {
-            priority_queue<int, vector<int>, greater<int>> temp = minHeap;
-            cout << "Min Heap: ";
-            while (!temp.empty()) {
-                cout << temp.top() << " ";
-                temp.pop();
-            }
-            cout << endl;
-        }
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
 };
 
+Node* insertion(Node* root, int element) {
+    Node* temp = new Node();
+    temp->data = element;
+    temp->left = nullptr;
+    temp->right = nullptr;
+    if (root == nullptr) {
+        root = temp;
+    } else if (root->data > element) {
+        root->left = insertion(root->left, element);
+    } else {
+        root->right = insertion(root->right, element);
+    }
+    return root;
+}
+
+int sum = 0;
+void inorder(Node* root){
+	if(root == nullptr){
+		return;
+	}
+	inorder(root->left);
+    sum += root->data;
+	inorder(root->right);  
+}
+
+
 int main() {
-    PriorityQueue pq;
-
-    pq.insertMax(1);
-    pq.insertMax(2);
-    pq.insertMax(3);
-    pq.insertMax(4);
-    pq.displayMax(); 
-
-    pq.insertMin(1);
-    pq.insertMin(2);
-    pq.insertMin(3);
-    pq.insertMin(4);
-    pq.displayMin(); 
-
+    Node* root = nullptr;
+    root = insertion(root, 6);
+    root = insertion(root, 3);
+    root = insertion(root, 8);
+    root = insertion(root, 2);
+    root = insertion(root, 4);
+    inorder(root);
+    cout<<"Sum of Tree is: "<<sum<<endl;
     return 0;
 }

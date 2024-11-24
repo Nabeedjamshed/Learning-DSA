@@ -1,123 +1,123 @@
-// #include<iostream>
-// using namespace std;
+#include<iostream>
+using namespace std;
 
-// class NabeedAli_Lab07 {
-//     int front;
-//     int rear;
-//     int k;
-//     int *circulardequeue;
+class NabeedAli_Lab07 {
+    int front;
+    int rear;
+    int k;
+    int *circulardequeue;
 
-// public:
-//     NabeedAli_Lab07(int size) {
-//         k = size;
-//         front = -1;
-//         rear = -1;
-//         circulardequeue = new int[k];
-//     }
+public:
+    NabeedAli_Lab07(int size) {
+        k = size;
+        front = -1;
+        rear = -1;
+        circulardequeue = new int[k];
+    }
 
-//     bool isFull() {
-//         return ((front == rear + 1) || (front == 0 && rear == k - 1));
-//     }
+    bool isFull() {
+        return ((front == rear + 1) || (front == 0 && rear == k - 1));
+    }
 
-//     bool isEmpty() {
-//         return (front == -1);
-//     }
+    bool isEmpty() {
+        return (front == -1);
+    }
 
-//     void insertFront(int x) {
-//         if (isFull()) {
-//             cout << "Dequeue is overflow" << endl;
-//         } else {
-//             if (isEmpty()) {
-//                 front = rear = 0;
-//             } else if (front == 0) {
-//                 front = k - 1;
-//             } else {
-//                 front--;
-//             }
-//             circulardequeue[front] = x;
-//         }
-//     }
+    void insertFront(int x) {
+        if (isFull()) {
+            cout << "Dequeue is overflow" << endl;
+        } else {
+            if (isEmpty()) {
+                front = rear = 0;
+            } else if (front == 0) {
+                front = k - 1;
+            } else {
+                front--;
+            }
+            circulardequeue[front] = x;
+        }
+    }
 
-//     void insertLast(int x) {
-//         if (isFull()) {
-//             cout << "Dequeue is overflow" << endl;
-//         } else {
-//             if (isEmpty()) {
-//                 front = rear = 0;
-//             } else {
-//                 rear = (rear + 1) % k;
-//             }
-//             circulardequeue[rear] = x;
-//         }
-//     }
+    void insertLast(int x) {
+        if (isFull()) {
+            cout << "Dequeue is overflow" << endl;
+        } else {
+            if (isEmpty()) {
+                front = rear = 0;
+            } else {
+                rear = (rear + 1) % k;
+            }
+            circulardequeue[rear] = x;
+        }
+    }
 
-//     void deleteFront() {
-//         if (isEmpty()) {
-//             cout << "Dequeue is already empty" << endl;
-//         } else if (front == rear) {
-//             front = rear = -1;
-//         } else {
-//             front = (front + 1) % k;
-//         }
-//     }
+    void deleteFront() {
+        if (isEmpty()) {
+            cout << "Dequeue is already empty" << endl;
+        } else if (front == rear) {
+            front = rear = -1;
+        } else {
+            front = (front + 1) % k;
+        }
+    }
 
-//     void deleteLast() {
-//         if (isEmpty()) {
-//             cout << "Dequeue is already empty" << endl;
-//         } else if (front == rear) {
-//             front = rear = -1;
-//         } else if (rear == 0) {
-//             rear = k - 1;
-//         } else {
-//             rear--;
-//         }
-//     }
+    void deleteLast() {
+        if (isEmpty()) {
+            cout << "Dequeue is already empty" << endl;
+        } else if (front == rear) {
+            front = rear = -1;
+        } else if (rear == 0) {
+            rear = k - 1;
+        } else {
+            rear--;
+        }
+    }
 
-//     int getFront() {
-//         if (isEmpty()) {
-//             return -1;
-//         }
-//         return circulardequeue[front];
-//     }
+    int getFront() {
+        if (isEmpty()) {
+            return -1;
+        }
+        return circulardequeue[front];
+    }
 
-//     int getRear() {
-//         if (isEmpty()) {
-//             return -1;
-//         }
-//         return circulardequeue[rear];
-//     }
+    int getRear() {
+        if (isEmpty()) {
+            return -1;
+        }
+        return circulardequeue[rear];
+    }
 
-//     void display() {
-//         if (isEmpty()) {
-//             cout << "Queue is underflow." << endl;
-//             return;
-//         }
-//         int i = front;
-//         while (i != rear) {
-//             cout << circulardequeue[i] << " ";
-//             i = (i + 1) % k;
-//         }
-//         cout << circulardequeue[rear] << endl;
-//     }
-// };
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is underflow." << endl;
+            return;
+        }
+        int i = front;
+        while (i != rear) {
+            cout << circulardequeue[i] << " ";
+            i = (i + 1) % k;
+        }
+        cout << circulardequeue[rear] << endl;
+    }
+};
 
-// int main() {
-//     NabeedAli_Lab07 myCircularDeque(3); 
-//     myCircularDeque.insertLast(1);
-//     myCircularDeque.insertLast(2);
-//     myCircularDeque.insertFront(3);
-//     myCircularDeque.insertFront(4); 
-//     cout << myCircularDeque.getRear() << endl;  
-//     cout << (myCircularDeque.isFull() ? "True" : "False") << endl;  
-//     myCircularDeque.display();
-//     cout<<"Delete from last"<<endl;
-//     myCircularDeque.deleteLast();
-//     myCircularDeque.display();
-//     cout<<"Insert from front"<<endl;
-//     myCircularDeque.insertFront(4);
-//     myCircularDeque.display();  
-//     return 0;
-// }
+int main() {
+    NabeedAli_Lab07 myCircularDeque(3); 
+    myCircularDeque.insertLast(1);
+    myCircularDeque.insertLast(2);
+    myCircularDeque.insertFront(3);
+    myCircularDeque.insertFront(4); 
+    cout << myCircularDeque.getRear() << endl;  
+    cout << (myCircularDeque.isFull() ? "True" : "False") << endl;  
+    myCircularDeque.display();
+    cout<<"Delete from last"<<endl;
+    myCircularDeque.deleteLast();
+    myCircularDeque.display();
+    cout<<"Insert from front"<<endl;
+    myCircularDeque.insertFront(4);
+    myCircularDeque.display();  
+    return 0;
+}
 
 
 // #include <iostream>

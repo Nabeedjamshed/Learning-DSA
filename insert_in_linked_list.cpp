@@ -31,3 +31,13 @@ void print(Node* head){
     }
     cout<<endl;
 }
+
+int main(){
+    Node* head = nullptr;
+    head = insert(head,1);
+    head = insert(head,2);
+    head = insert(head,3);
+    head = insert(head,4);
+    head = insert(head,5);
+    print(head);
+}
